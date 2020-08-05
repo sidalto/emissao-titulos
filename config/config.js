@@ -13,6 +13,8 @@ module.exports = {
     underscoredAll: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
+    charset: 'utf8mb4_general_ci',
+    collate: 'utf8mb4_general_ci',
   },
   dialectOptions: {
     timezone: 'America/Sao_Paulo',
