@@ -2,14 +2,13 @@ const Titulo = require('../models/Titulo');
 
 class TituloController {
   async getTitulo(req, res) {
+    let { id } = req.params;
     try {
-      const titulo = await Titulo.findByPK({
-        attributes: ['id', 'nome'],
-        include: {
-          model: Proprietario,
-          attributes: [],
-        },
+      const titulo = await Titulo.findOne({
+        where: id,
+        attributes: ['nome', 'chave'],
       });
+
       return res.json(titulo);
     } catch (erro) {
       return res.status(400).json({
