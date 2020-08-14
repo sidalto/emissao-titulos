@@ -1,8 +1,11 @@
 const express = require('express');
 const tituloController = require('./controllers/TituloController');
 const proprietarioController = require('./controllers/ProprietarioController');
+const loginRequerido = require('./middlewares/loginRequerido');
 
 const routes = express.Router();
+
+routes.use(loginRequerido);
 
 // rota da API para validação do título
 routes.get('/api/v1/titulo:id', tituloController.show);

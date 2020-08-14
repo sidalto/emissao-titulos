@@ -22,6 +22,11 @@ class Usuario extends Model {
             msg: 'CPF já existe',
           },
         },
+        tipo: {
+          type: Sequelize.STRING,
+          defaultValue: '',
+          allowNull: false,
+        },
         senha_hash: {
           type: Sequelize.STRING,
           defaultValue: '',

@@ -16,6 +16,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      tipo: {
+        type: Sequelize.STRING(1),
+        allowNull: false,
+      },
       senha_hash: {
         type: Sequelize.STRING(150),
         allowNull: false,
