@@ -1,4 +1,4 @@
-import Sequelize, { Model } from 'sequelize';
+const { Sequelize, Model } = require('sequelize');
 
 class Proprietario extends Model {
   static init(sequelize) {
@@ -86,4 +86,4 @@ class Proprietario extends Model {
   }
 }
 
-export default Proprietario;
+module.exports = Proprietario;
