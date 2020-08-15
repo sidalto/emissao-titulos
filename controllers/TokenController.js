@@ -33,4 +33,4 @@ class TokenController {
   }
 }
 
-export default new TokenController();
+module.exports = new TokenController();

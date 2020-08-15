@@ -1,10 +1,18 @@
 const express = require('express');
+
 const tituloController = require('./controllers/TituloController');
 const proprietarioController = require('./controllers/ProprietarioController');
+const tokenController = require('./controllers/TokenController');
+
 const loginRequerido = require('./middlewares/loginRequerido');
 
 const routes = express.Router();
 
+// rotas abertas
+routes.get('/', (req, res) => res.json('index'));
+routes.post('/token', tokenController.store);
+
+// aplicação do middleware de login
 routes.use(loginRequerido);
 
 // rota da API para validação do título
