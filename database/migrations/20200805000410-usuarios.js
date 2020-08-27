@@ -9,7 +9,7 @@ module.exports = {
       },
       nome: {
         type: Sequelize.STRING(150),
-        allowNull: true,
+        allowNull: false,
       },
       cpf: {
         type: Sequelize.STRING(14),

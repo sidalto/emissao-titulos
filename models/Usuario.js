@@ -8,6 +8,7 @@ class Usuario extends Model {
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
+          allowNull: false,
           validate: {
             len: {
               args: [3, 50],
@@ -18,6 +19,7 @@ class Usuario extends Model {
         cpf: {
           type: Sequelize.STRING,
           defaultValue: '',
+          allowNull: false,
           unique: {
             msg: 'CPF já existe',
           },
@@ -30,10 +32,12 @@ class Usuario extends Model {
         senha_hash: {
           type: Sequelize.STRING,
           defaultValue: '',
+          allowNull: false,
         },
         senha: {
           type: Sequelize.VIRTUAL,
           defaultValue: '',
+          allowNull: false,
           validate: {
             len: {
               args: [8, 50],
