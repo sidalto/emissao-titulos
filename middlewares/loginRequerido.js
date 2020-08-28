@@ -11,12 +11,9 @@ async function loginRequerido(req, res, next) {
   const [, token] = authorization.split(' ');
   try {
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, nome } = dados;
+    const { id } = dados;
     const usuario = await Usuario.findOne({
-      where: {
-        id,
-        nome,
-      },
+      where: { id },
     });
     if (!usuario) {
       return res.status(401).json({
@@ -24,7 +21,9 @@ async function loginRequerido(req, res, next) {
       });
     }
     req.id = id;
-    req.nome = nome;
+    req.cpf = usuario.cpf;
+    req.nome = usuario.nome;
+    req.tipo = usuario.tipo;
     return next();
   } catch (erro) {
     return res.status(401).json({

@@ -15,17 +15,7 @@ class TokenController {
         erros: ['Usuário ou senha incorretos'],
       });
     }
-    // if (!usuario) {
-    //   return res.status(401).json({
-    //     erros: ['Usuário não existe'],
-    //   });
-    // }
-    // if (!(await usuario.verificaSenha(senha))) {
-    //   return res.status(401).json({
-    //     erros: ['Senha inválida'],
-    //   });
-    // }
-    const { id } = usuario;
+    const { id, nome } = usuario;
     const token = jwt.sign({ id, nome }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });

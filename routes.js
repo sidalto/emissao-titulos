@@ -1,4 +1,4 @@
-const express = require('express');
+const routes = require('express').Router();
 
 const usuarioController = require('./controllers/UsuarioController');
 const tituloController = require('./controllers/TituloController');
@@ -6,15 +6,20 @@ const proprietarioController = require('./controllers/ProprietarioController');
 const tokenController = require('./controllers/TokenController');
 
 const loginRequerido = require('./middlewares/loginRequerido');
-
-const routes = express.Router();
-
-// aplicação do middleware de login
-// routes.use(loginRequerido);
+const permissaoRequerida = require('./middlewares/permissaoRequerida');
 
 // rotas abertas
 routes.get('/', (req, res) => res.json('index'));
 routes.post('/token', tokenController.store);
+
+// middleware de login
+routes.use(loginRequerido);
+
+// rota da API para validação do título
+routes.get('/api/v1/titulo:id', tituloController.show);
+
+// middleware de nível de acesso
+routes.use(permissaoRequerida);
 
 // rotas do administrativo - usuário
 routes.get('/admin/usuarios', usuarioController.index);
@@ -22,9 +27,6 @@ routes.get('/admin/usuario/:id', usuarioController.show);
 routes.post('/admin/usuario', usuarioController.store);
 routes.patch('/admin/usuario/:id', usuarioController.update);
 routes.delete('/admin/usuario/:id', usuarioController.delete);
-
-// rota da API para validação do título
-routes.get('/api/v1/titulo:id', tituloController.show);
 
 // rotas do administrativo - proprietário
 routes.get('/admin/proprietarios', proprietarioController.index);

@@ -10,7 +10,9 @@ class UsuarioController {
       });
       return res.json(usuarios);
     } catch (erro) {
-      return res.status(400).json(erro.message);
+      return res.status(400).json({
+        erros: erro.errors.map((e) => e.message),
+      });
     }
   }
 
@@ -20,7 +22,9 @@ class UsuarioController {
       const { nome, cpf } = usuario;
       return res.json({ nome, cpf });
     } catch (erro) {
-      return res.status(400).json(erro.message);
+      return res.status(400).json({
+        erros: erro.errors.map((e) => e.message),
+      });
     }
   }
 
@@ -42,7 +46,9 @@ class UsuarioController {
       }
       return res.json(usuario);
     } catch (erro) {
-      return res.status(400).json(erro.message);
+      return res.status(400).json({
+        erros: erro.errors.map((e) => e.message),
+      });
     }
   }
 
@@ -65,7 +71,9 @@ class UsuarioController {
       const usuarioAtualizado = await usuario.update(req.body);
       return res.json(usuarioAtualizado);
     } catch (erro) {
-      return res.status(400).json(erro.message);
+      return res.status(400).json({
+        erros: erro.errors.map((e) => e.message),
+      });
     }
   }
 
@@ -88,7 +96,9 @@ class UsuarioController {
       await usuario.destroy(usuario);
       return res.json(usuario);
     } catch (erro) {
-      return res.status(400).json(erro.message);
+      return res.status(400).json({
+        erros: erro.errors.map((e) => e.message),
+      });
     }
   }
 }
