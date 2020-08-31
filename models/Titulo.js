@@ -1,4 +1,7 @@
 const { Sequelize, Model } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
+const qrcode = require('qrcode');
+const crypto = require('crypto').randomBytes(64).toString('hex');
 
 class Titulo extends Model {
   static init(sequelize) {
@@ -66,7 +69,7 @@ class Titulo extends Model {
           unique: true,
         },
         qrcode: {
-          type: Sequelize.STRING,
+          type: Sequelize.STRING(150),
           defaultValue: '',
           allowNull: false,
           unique: true,
@@ -76,6 +79,28 @@ class Titulo extends Model {
         sequelize,
       }
     );
+
+    this.addHook('beforeSave', async (titulo) => {
+      const string = this.processo + this.quadra + this.lote;
+      // titulo.chave = await uuidv5(string, crypto);
+      titulo.chave = await uuidv4();
+
+      // qrcode.toDataURL(titulo.chave, function (err, url) {
+      //   titulo.qrcode = url;
+      //   console.log(url);
+      // });
+    });
+
+    this.addHook('beforeUpdate', async (titulo) => {
+      if (titulo.processo && titulo.quadra && titulo.lote) {
+        const string = this.processo + this.quadra + this.lote;
+        titulo.chave = await uuidv5(string, crypto);
+      }
+      // qrcode.toDataURL(titulo.chave, function (err, url) {
+      //   this.qrcode = url;
+      //   console.log(url);
+      // });
+    });
 
     return this;
   }

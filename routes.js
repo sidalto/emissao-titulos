@@ -16,7 +16,7 @@ routes.post('/token', tokenController.store);
 routes.use(loginRequerido);
 
 // rota da API para validação do título
-routes.get('/api/v1/titulo:id', tituloController.show);
+routes.get('/api/v1/titulo:chave', tituloController.show);
 
 // middleware de nível de acesso
 routes.use(permissaoRequerida);
@@ -37,7 +37,7 @@ routes.delete('/admin/proprietario/:id', proprietarioController.delete);
 
 // rotas do administrativo - título
 routes.get('/admin/titulos', tituloController.index);
-routes.get('/admin/titulo/:id', tituloController.show);
+routes.get('/admin/titulo/:chave', tituloController.show);
 routes.post('/admin/titulo', tituloController.store);
 routes.patch('/admin/titulo/:id', tituloController.update);
 routes.delete('/admin/titulo/:id', tituloController.delete);

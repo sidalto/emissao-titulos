@@ -52,7 +52,7 @@ module.exports = {
         allowNull: false,
       },
       chave: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.UUID,
         allowNull: false,
         unique: true,
       },

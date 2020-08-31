@@ -14,7 +14,7 @@ class ProprietarioController {
           'conjuge_rg',
           'conjuge_cpf',
         ],
-        order: ['nome', 'ASC'],
+        order: [['nome', 'ASC']],
       });
       return res.json(proprietarios);
     } catch (erro) {
@@ -54,7 +54,6 @@ class ProprietarioController {
           'conjuge_rg',
           'conjuge_cpf',
         ],
-        order: ['nome', 'ASC'],
       });
       if (!proprietario) {
         return res.status(400).json({
@@ -83,8 +82,11 @@ class ProprietarioController {
           erros: ['Proprietário não existe'],
         });
       }
-      const proprietarioAtualizado = await Proprietario.update(req.body);
-      return res.json(proprietarioAtualizado);
+      const proprietarioAtualizado = await proprietario.update(req.body);
+      return res.json({
+        nome: proprietarioAtualizado.nome,
+        cpf: proprietarioAtualizado.cpf,
+      });
     } catch (erro) {
       return res.status(400).json({
         erros: erro.errors.map((e) => e.message),

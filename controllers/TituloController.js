@@ -1,4 +1,6 @@
 const Titulo = require('../models/Titulo');
+const Proprietario = require('../models/Proprietario');
+const qrcode = require('qrcode');
 
 class TituloController {
   async index(req, res) {
@@ -16,7 +18,10 @@ class TituloController {
           'chave',
           'qrcode',
         ],
-        order: [['processo', 'ASC'], ['nome', 'ASC']],
+        order: [
+          ['processo', 'ASC'],
+          ['nome', 'ASC'],
+        ],
         include: {
           model: Proprietario,
           attributes: ['nome', 'cpf'],
@@ -32,8 +37,8 @@ class TituloController {
 
   async store(req, res) {
     try {
-      const proprietario = await Proprietario.create(req.body);
-      return res.json(proprietario);
+      const titulo = await Titulo.create(req.body);
+      return res.json(titulo);
     } catch (erro) {
       return res.status(400).json({
         erros: erro.errors.map((e) => e.message),
@@ -66,13 +71,18 @@ class TituloController {
           model: Proprietario,
           attributes: ['nome', 'cpf'],
         },
-        where: chave,
+        where: { chave },
       });
       if (!chave) {
         return res.status(400).json({
           erros: ['Título não existe'],
         });
       }
+
+      titulo.qrcode = qrcode.toDataURL(titulo.chave, function (err, url) {
+        return url;
+      });
+
       return res.json(titulo);
     } catch (erro) {
       return res.status(400).json({
