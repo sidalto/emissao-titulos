@@ -81,25 +81,7 @@ class Titulo extends Model {
     );
 
     this.addHook('beforeSave', async (titulo) => {
-      const string = this.processo + this.quadra + this.lote;
-      // titulo.chave = await uuidv5(string, crypto);
       titulo.chave = await uuidv4();
-
-      // qrcode.toDataURL(titulo.chave, function (err, url) {
-      //   titulo.qrcode = url;
-      //   console.log(url);
-      // });
-    });
-
-    this.addHook('beforeUpdate', async (titulo) => {
-      if (titulo.processo && titulo.quadra && titulo.lote) {
-        const string = this.processo + this.quadra + this.lote;
-        titulo.chave = await uuidv5(string, crypto);
-      }
-      // qrcode.toDataURL(titulo.chave, function (err, url) {
-      //   this.qrcode = url;
-      //   console.log(url);
-      // });
     });
 
     return this;
