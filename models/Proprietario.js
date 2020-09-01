@@ -19,6 +19,12 @@ class Proprietario extends Model {
           type: Sequelize.STRING,
           defaultValue: '',
           allowNull: false,
+          validate: {
+            len: {
+              args: [14],
+              msg: 'CPF precisa ter 14 caracteres.',
+            },
+          },
           unique: {
             msg: 'CPF já existe',
           },

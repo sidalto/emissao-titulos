@@ -13,13 +13,13 @@ routes.get('/', (req, res) => res.json('index'));
 routes.post('/token', tokenController.store);
 
 // middleware de login
-routes.use(loginRequerido);
+//routes.use(loginRequerido);
 
 // rota da API para validação do título
-routes.get('/api/v1/titulo:chave', tituloController.show);
+routes.get('/api/v1/titulo/:chave', tituloController.show);
 
 // middleware de nível de acesso
-routes.use(permissaoRequerida);
+//routes.use(permissaoRequerida);
 
 // rotas do administrativo - usuário
 routes.get('/admin/usuarios', usuarioController.index);

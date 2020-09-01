@@ -1,6 +1,8 @@
+require('dotenv').config();
+const QRCode = require('qrcode');
+
 const Titulo = require('../models/Titulo');
 const Proprietario = require('../models/Proprietario');
-const qrcode = require('qrcode');
 
 class TituloController {
   async index(req, res) {
@@ -78,12 +80,10 @@ class TituloController {
           erros: ['Título não existe'],
         });
       }
-
-      titulo.qrcode = qrcode.toDataURL(titulo.chave, function (err, url) {
-        return url;
-      });
-
-      return res.json(titulo);
+      const rotaAPI = '/api/v1/titulo/';
+      const url = process.env.APP_URL + ':' + process.env.APP_PORT + rotaAPI + titulo.chave;
+      titulo.qrcode = await QRCode.toDataURL(url);
+      res.json({ titulo });
     } catch (erro) {
       return res.status(400).json({
         erros: erro.errors.map((e) => e.message),
