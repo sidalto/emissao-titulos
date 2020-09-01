@@ -1,0 +1,60 @@
+<html>
+<body>
+	<input type="text" name="chave" id="chave">
+	<button id="enviar" onclick="validar()">Enviar</button> 
+	<b>Dados Proprietario</b>
+	<div id="nome"></div>
+	<div id="cpf"></div>
+	<div id="rg"></div>
+	<div id="profissao"></div>
+	<div id="estado_civil"></div>
+	<b>Dados Conjuge</b>
+	<div id="conjuge_nome"></div>
+	<div id="conjuge_rg"></div>
+	<div id="conjuge_cpf"></div>
+	<b>Dados Imovel</b>
+	<div id="processo"></div>
+	<div id="logradouro"></div>
+	<div id="numero"></div>
+	<div id="complemento"></div>
+	<div id="bairro"></div>
+	<div id="quadra"></div>
+	<div id="lote"></div>
+	<div id="data_expedicao"></div>
+	<b>Dados Validação</b>
+	<div id="chave"></div>
+	<div>
+		<img id="qrcode-image">
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(function() {
+		$('#enviar').click(function (){
+		 let chave = $('#chave').val();
+		 console.log(chave);
+		 $.get( "http://10.10.10.4:3000/api/v1/titulo/"+chave, function( response ) {
+            $( "#nome" ).text(response.titulo.Proprietario.nome);
+            $( "#cpf" ).text(response.titulo.Proprietario.cpf );
+            $( "#rg" ).text(response.titulo.Proprietario.rg );
+            $( "#profissao" ).text(response.titulo.Proprietario.profissao );
+            $( "#estado_civil" ).text(response.titulo.Proprietario.estado_civil );
+            $( "#conjuge_nome" ).text(response.titulo.Proprietario.conjuge_nome );
+            $( "#conjuge_rg" ).text(response.titulo.Proprietario.conjuge_rg );
+            $( "#conjuge_cpf" ).text(response.titulo.Proprietario.conjuge_cpf );
+            $( "#processo" ).text(response.titulo.processo );
+            $( "#logradouro" ).text(response.titulo.logradouro );
+            $( "#numero" ).text(response.titulo.numero );
+            $( "#complemento" ).text(response.titulo.complemento );
+            $( "#bairro" ).text(response.titulo.bairro );
+            $( "#quadra" ).text(response.titulo.quadra );
+            $( "#lote" ).text(response.titulo.lote );
+            $( "#data_expedicao" ).text(response.titulo.data_expedicao );
+            $( "#chave" ).text(response.titulo.chave );
+            $( "#qrcode-image" ).attr("src", response.titulo.qrcode ).show();
+        });
+		});
+       
+    });
+</script>
+</html>
