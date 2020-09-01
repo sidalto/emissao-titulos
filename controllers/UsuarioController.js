@@ -1,5 +1,4 @@
 const Usuario = require('../models/Usuario');
-const Proprietario = require('../models/Proprietario');
 
 class UsuarioController {
   async index(req, res) {
@@ -19,7 +18,7 @@ class UsuarioController {
 
   async store(req, res) {
     try {
-      const usuario = await Proprietario.create(req.body);
+      const usuario = await Usuario.create(req.body);
       const { nome, cpf } = usuario;
       return res.json({ nome, cpf });
     } catch (erro) {
