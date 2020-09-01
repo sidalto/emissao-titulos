@@ -1,0 +1,14 @@
+<html>
+<body>
+    <image id="qrcode-image">
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(function() {
+        $.get( "http://localhost:3000/api/v1/titulo/c3c05f5d-f839-4671-8001-1aff0deed397", function( response ) {
+            // console.log(response);
+            $( "#qrcode-image" ).attr( "src", response.titulo.qrcode ).show();
+        });
+    });
+</script>
+</html>
