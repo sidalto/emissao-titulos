@@ -71,7 +71,16 @@ class TituloController {
         ],
         include: {
           model: Proprietario,
-          attributes: ['nome', 'cpf'],
+          attributes: [
+            'nome',
+            'cpf',
+            'rg',
+            'profissao',
+            'estado_civil',
+            'conjuge_nome',
+            'conjuge_rg',
+            'conjuge_cpf',
+          ],
         },
         where: { chave },
       });
@@ -81,7 +90,12 @@ class TituloController {
         });
       }
       const rotaAPI = '/api/v1/titulo/';
-      const url = process.env.APP_URL + ':' + process.env.APP_PORT + rotaAPI + titulo.chave;
+      const url =
+        process.env.APP_URL +
+        ':' +
+        process.env.APP_PORT +
+        rotaAPI +
+        titulo.chave;
       titulo.qrcode = await QRCode.toDataURL(url);
       res.json({ titulo });
     } catch (erro) {

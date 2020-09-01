@@ -9,7 +9,7 @@ const loginRequerido = require('./middlewares/loginRequerido');
 const permissaoRequerida = require('./middlewares/permissaoRequerida');
 
 // rotas abertas
-routes.get('/', (req, res) => res.json('index'));
+routes.get('/', (req, res) => res.render('index', { valor: 'Oi' }));
 routes.post('/token', tokenController.store);
 
 // middleware de login
