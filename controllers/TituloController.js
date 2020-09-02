@@ -8,25 +8,15 @@ class TituloController {
   async index(req, res) {
     try {
       const titulos = await Titulo.findAll({
-        attributes: [
-          'processo',
-          'logradouro',
-          'numero',
-          'complemento',
-          'bairro',
-          'quadra',
-          'lote',
-          'data_expedicao',
-          'chave',
-          'qrcode',
-        ],
-        order: [
-          ['processo', 'ASC'],
-          ['nome', 'ASC'],
-        ],
+        attributes: {
+          exclude: ['created_at', 'updated_at'],
+        },
+        order: [['nome', 'ASC']],
         include: {
           model: Proprietario,
-          attributes: ['nome', 'cpf'],
+          attributes: {
+            exclude: ['created_at', 'updated_at'],
+          },
         },
       });
       return res.json(titulos);

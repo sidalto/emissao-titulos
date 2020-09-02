@@ -4,16 +4,9 @@ class ProprietarioController {
   async index(req, res) {
     try {
       const proprietarios = await Proprietario.findAll({
-        attributes: [
-          'nome',
-          'cpf',
-          'rg',
-          'profissao',
-          'estado_civil',
-          'conjuge_nome',
-          'conjuge_rg',
-          'conjuge_cpf',
-        ],
+        attributes: {
+          exclude: ['created_at', 'updated_at'],
+        },
         order: [['nome', 'ASC']],
       });
       return res.json(proprietarios);

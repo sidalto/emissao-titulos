@@ -69,10 +69,9 @@ class Titulo extends Model {
           unique: true,
         },
         qrcode: {
-          type: Sequelize.STRING(150),
+          type: Sequelize.TEXT,
           defaultValue: '',
           allowNull: false,
-          unique: true,
         },
       },
       {

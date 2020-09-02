@@ -62,6 +62,11 @@ class Proprietario extends Model {
           defaultValue: '',
           allowNull: true,
         },
+        conjuge_profissao: {
+          type: Sequelize.STRING,
+          defaultValue: '',
+          allowNull: true,
+        },
         conjuge_rg: {
           type: Sequelize.STRING,
           defaultValue: '',
