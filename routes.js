@@ -1,5 +1,6 @@
 const routes = require('express').Router();
 
+const loginController = require('./controllers/LoginController')
 const usuarioController = require('./controllers/UsuarioController');
 const tituloController = require('./controllers/TituloController');
 const proprietarioController = require('./controllers/ProprietarioController');
@@ -9,7 +10,7 @@ const loginRequerido = require('./middlewares/loginRequerido');
 const permissaoRequerida = require('./middlewares/permissaoRequerida');
 
 // rotas abertas
-routes.get('/', (req, res) => res.render('index', { valor: 'Oi' }));
+routes.get('/', loginController.index);
 routes.post('/token', tokenController.store);
 
 // middleware de login
